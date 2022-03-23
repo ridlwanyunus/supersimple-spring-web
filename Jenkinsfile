@@ -1,15 +1,10 @@
 pipeline {
 	agent any
 	stages {
-	    
 	    stage('Checkout Source'){
-	        
-	        Steps {
+	        steps {
 	            git 'https://github.com/ridlwanyunus/supersimple-spring-web.git'
 	        }
-
 	    }
-
 	}
-
 }
