@@ -33,7 +33,7 @@ pipeline {
 	    stage('Deploy to kubernetes'){
 	        steps {
 	            script {
-            	    kubernetesDeploy(configs: "httpd.yml", kubeconfigId: "mykubeconfig")
+            	    kubernetesDeploy(configs: "httpd.yml", kubeconfigId: "mykubeconfiguration")
             	}
 	        }
 	    }
@@ -42,7 +42,7 @@ pipeline {
 	post {
 	    always {
 	        sh 'docker logout'
-	        sh 'dcoker rmi ridlwan/supersimple-spring-web:1.0'
+	        sh 'docker rmi ridlwan/supersimple-spring-web:1.0'
 	    }
 
 	}
