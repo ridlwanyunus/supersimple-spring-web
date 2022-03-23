@@ -1,7 +1,5 @@
 pipeline {
-	agent {
-	    label: 'supersimple-spring-web-label'
-	}
+	agent any
 	stages {
 	    
 	    stage('Checkout Source'){
