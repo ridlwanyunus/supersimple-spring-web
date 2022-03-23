@@ -1,5 +1,9 @@
 pipeline {
 	agent any
+	environment {
+	    DOCKERHUB_CREDENTIALS=credentials('ridlwan-dockerhub-creds')
+	}
+
 	stages {
 	    stage('Checkout Source'){
 	        steps {
@@ -16,5 +20,23 @@ pipeline {
 	            sh 'docker build -t ridlwan/supersimple-spring-web:1.0 .'
 	        }
 	    }
+	    stage('Login to dockerhub'){
+	        steps {
+	            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+	        }
+	    }
+	    stage('Push image to dockerhub'){
+	        steps {
+	            sh 'docker push ridlwan/supersimple-spring-web:1.0'
+	        }
+	    }
 	}
+	
+	post {
+	    always {
+	        sh 'docker logout'
+	    }
+
+	}
+
 }
